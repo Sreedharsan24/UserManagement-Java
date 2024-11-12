@@ -2,6 +2,7 @@ package com.example.demo.utils.Validations;
 
 import com.example.demo.exceptions.FieldValidationException;
 import com.example.demo.repository.userRepository;
+import com.example.demo.utils.constants.TicketConstants;
 import com.example.demo.utils.constants.userConstants;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,12 @@ public class UserValidationService  {
         }
         if (userRepository.existsByMobileNo(mobileNo)) {
             throw new FieldValidationException("MobileNo", userConstants.MOBILE_ALREADY_EXISTS);
+        }
+    }
+
+    public void ticketModuleCommonValidation(String ticketName) {
+        if (userRepository.existsByEmail(ticketName)) {
+            throw new FieldValidationException("ticketName", TicketConstants.TICKET_NAME_ALREADY_EXISTS);
         }
     }
 }

@@ -79,7 +79,7 @@ public class userServiceImp implements userService {
             userResponseModel responseModel = userMapper.toResponseModel(userEntity.get());
             return ResponseEntity.ok(responseModel);
         } else {
-            return null;
+            return ResponseEntity.notFound().build();
         }
     }
 
