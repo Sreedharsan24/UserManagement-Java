@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.models.UserGetInputModel;
-import com.example.demo.models.userInputModel;
-import com.example.demo.models.userResponseModel;
+import com.example.demo.models.User.UserGetInputModel;
+import com.example.demo.models.User.userInputModel;
+import com.example.demo.models.User.userResponseModel;
 import org.springframework.http.ResponseEntity;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.List;

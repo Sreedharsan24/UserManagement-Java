@@ -1,8 +1,8 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entity.user;
-import com.example.demo.models.userInputModel;
-import com.example.demo.models.userResponseModel;
+import com.example.demo.models.User.userInputModel;
+import com.example.demo.models.User.userResponseModel;
 import com.example.demo.utils.Enum.EnumStatus;
 import org.springframework.stereotype.Component;
 
@@ -31,18 +31,4 @@ public class userMapper {
                 user.getLocation()
         );
     }
-
-    public userInputModel toInputModel(Optional<user> userEntity) {
-        if(userEntity.isPresent()) {
-            userInputModel inputModel = new userInputModel();
-            user entity = userEntity.get();
-            inputModel.setName(entity.getName());
-            inputModel.setEmail(entity.getEmail());
-            inputModel.setMobileNo(entity.getMobileNo());
-            inputModel.setLocation(entity.getLocation());
-            return inputModel;
-        }
-        return null;
-    }
-
 }

@@ -1,9 +1,9 @@
 package com.example.demo.service.implementation;
 
 import com.example.demo.mapper.userMapper;
-import com.example.demo.models.UserGetInputModel;
-import com.example.demo.models.userInputModel;
-import com.example.demo.models.userResponseModel;
+import com.example.demo.models.User.UserGetInputModel;
+import com.example.demo.models.User.userInputModel;
+import com.example.demo.models.User.userResponseModel;
 import com.example.demo.repository.userRepository;
 import com.example.demo.service.userService;
 import com.example.demo.utils.Enum.EnumStatus;

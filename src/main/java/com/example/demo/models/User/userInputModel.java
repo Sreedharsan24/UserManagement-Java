@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.User;
 
 import com.example.demo.utils.constants.userConstants;
 import jakarta.validation.constraints.*;
