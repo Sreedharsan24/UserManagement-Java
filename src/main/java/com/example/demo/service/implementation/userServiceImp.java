@@ -1,14 +1,13 @@
 package com.example.demo.service.implementation;
 
-import com.example.demo.exceptions.FieldValidationException;
 import com.example.demo.mapper.userMapper;
 import com.example.demo.models.UserGetInputModel;
 import com.example.demo.models.userInputModel;
 import com.example.demo.models.userResponseModel;
 import com.example.demo.repository.userRepository;
 import com.example.demo.service.userService;
-import com.example.demo.utils.constants.Enum.EnumStatus;
-import com.example.demo.utils.constants.Validations.UserValidationService;
+import com.example.demo.utils.Enum.EnumStatus;
+import com.example.demo.utils.Validations.UserValidationService;
 import com.example.demo.utils.constants.userConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.entity.user;
@@ -19,8 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static com.example.demo.utils.constants.userConstants.INACTIVE;
 
 @Service
 public class userServiceImp implements userService {

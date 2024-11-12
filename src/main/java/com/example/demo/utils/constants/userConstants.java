@@ -1,11 +1,6 @@
 package com.example.demo.utils.constants;
 
 public class userConstants {
-
-    private userConstants() {
-
-    }
-
     public static final String NAME_REQUIRED = "Name is required";
     public static final String NAME_SIZE = "Minimum 4 Characters Required";
     public static final String MOBILE_NO_REQUIRED = "Mobile number is required";
@@ -22,5 +17,4 @@ public class userConstants {
     public static final String USER_DEACTIVATE_SUCCESS = "User deactivated successfully";
     public static final String USER_DEACTIVATE_FAIL = "User not found";
     public static final String SEARCH_MAX_LIMIT ="Search text should not exceed 100 characters";
-
 }

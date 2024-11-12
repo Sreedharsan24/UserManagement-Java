@@ -1,4 +1,4 @@
-package com.example.demo.utils.constants.Validations;
+package com.example.demo.utils.Validations;
 
 import com.example.demo.exceptions.FieldValidationException;
 import com.example.demo.repository.userRepository;

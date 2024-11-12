@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.utils.constants.Enum.EnumStatus;
+import com.example.demo.utils.Enum.EnumStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.entity.user;
 

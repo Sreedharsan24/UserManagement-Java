@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
 
-import com.example.demo.utils.constants.Enum.EnumStatus;
+import com.example.demo.utils.Enum.EnumStatus;
 import jakarta.persistence.*;
 
 @Entity

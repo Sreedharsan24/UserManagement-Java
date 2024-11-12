@@ -3,12 +3,10 @@ package com.example.demo.mapper;
 import com.example.demo.entity.user;
 import com.example.demo.models.userInputModel;
 import com.example.demo.models.userResponseModel;
-import com.example.demo.utils.constants.Enum.EnumStatus;
+import com.example.demo.utils.Enum.EnumStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-
-import static com.example.demo.utils.constants.Enum.EnumStatus.Active;
 
 @Component
 public class userMapper {

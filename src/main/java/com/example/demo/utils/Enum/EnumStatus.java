@@ -1,4 +1,4 @@
-package com.example.demo.utils.constants.Enum;
+package com.example.demo.utils.Enum;
 
 public enum EnumStatus {
     Active,

@@ -1,6 +1,6 @@
 package com.example.demo.models;
 
-import com.example.demo.utils.constants.Enum.EnumStatus;
+import com.example.demo.utils.Enum.EnumStatus;
 
 public class userResponseModel {
 
