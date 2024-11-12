@@ -6,6 +6,7 @@ import com.example.demo.models.UserGetInputModel;
 import com.example.demo.models.userInputModel;
 import com.example.demo.models.userResponseModel;
 import com.example.demo.repository.userRepository;
+import com.example.demo.service.userService;
 import com.example.demo.utils.constants.Enum.EnumStatus;
 import com.example.demo.utils.constants.Validations.UserValidationService;
 import com.example.demo.utils.constants.userConstants;
@@ -22,18 +23,18 @@ import java.util.stream.Collectors;
 import static com.example.demo.utils.constants.userConstants.INACTIVE;
 
 @Service
-public class userServiceImp implements userService{
-
-    private final userRepository userRepository;
-    private final userMapper userMapper;
-    private final UserValidationService userValidationService;
+public class userServiceImp implements userService {
 
     @Autowired
-    public userServiceImp(userRepository userRepository, userMapper userMapper, UserValidationService userValidationService) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-        this.userValidationService = userValidationService;
-    }
+    userRepository userRepository;
+
+    @Autowired
+    userMapper userMapper;
+
+    @Autowired
+    UserValidationService userValidationService;
+
+
 
     public userResponseModel create(userInputModel userData) {
 

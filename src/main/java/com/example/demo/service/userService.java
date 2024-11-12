@@ -1,4 +1,4 @@
-package com.example.demo.service.implementation;
+package com.example.demo.service;
 
 import com.example.demo.models.UserGetInputModel;
 import com.example.demo.models.userInputModel;

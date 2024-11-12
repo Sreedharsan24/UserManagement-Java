@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.models.UserGetInputModel;
 import com.example.demo.models.userInputModel;
 import com.example.demo.models.userResponseModel;
-import com.example.demo.service.implementation.userService;
+import com.example.demo.service.userService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
