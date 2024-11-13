@@ -5,6 +5,7 @@ import com.example.demo.entity.user;
 import com.example.demo.models.Tickets.CreateTicketInputModel;
 import com.example.demo.models.Tickets.TicketGetInputModel;
 import com.example.demo.models.Tickets.TicketResponseModel;
+import com.example.demo.models.Tickets.UpdateTicketInputModel;
 import com.example.demo.utils.Enum.EnumStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -16,9 +17,11 @@ public interface TicketService {
 
     TicketResponseModel createTask (CreateTicketInputModel createInputData) throws FileAlreadyExistsException;
 
-    List<TicketResponseModel> getTicketsList (TicketGetInputModel getData);
+    List<TicketResponseModel> getTicketsList (TicketGetInputModel getData) throws FileAlreadyExistsException;
 
-    ResponseEntity<TicketResponseModel> getById (Long id);
+    ResponseEntity<TicketResponseModel> getById (Long id) throws FileAlreadyExistsException;
 
-    ResponseEntity<String> deleteById (Long id);
+    ResponseEntity<String> deleteById (Long id) throws FileAlreadyExistsException;
+
+    ResponseEntity<String> updateTicketById(Long id, UpdateTicketInputModel updateInputData) throws FileAlreadyExistsException;
 }

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.models.Tickets.CreateTicketInputModel;
 import com.example.demo.models.Tickets.TicketGetInputModel;
 import com.example.demo.models.Tickets.TicketResponseModel;
+import com.example.demo.models.Tickets.UpdateTicketInputModel;
 import com.example.demo.service.TicketService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,21 @@ public class TicketController {
     }
 
     @PostMapping("/get")
-    public List<TicketResponseModel> getTicketsList(@Valid @RequestBody TicketGetInputModel getData) {
+    public List<TicketResponseModel> getTicketsList(@Valid @RequestBody TicketGetInputModel getData) throws FileAlreadyExistsException {
         return ticketService.getTicketsList(getData);
     }
 
     @GetMapping("/id")
-    public ResponseEntity<TicketResponseModel> getTicketById(Long id) {
+    public ResponseEntity<TicketResponseModel> getTicketById(@PathVariable Long id) throws FileAlreadyExistsException {
         return ticketService.getById(id);
     }
 
     @PutMapping("/id")
-    public ResponseEntity<String> deleteTicket(Long id) {
+    public ResponseEntity<String> deleteTicket(@PathVariable Long id) throws FileAlreadyExistsException {
         return ticketService.deleteById(id);
+    }
+
+    public ResponseEntity<String> updateTicket(@PathVariable Long id, @Valid @RequestBody UpdateTicketInputModel updateInputData) throws FileAlreadyExistsException {
+        return ticketService.updateTicketById(id, updateInputData);
     }
 }

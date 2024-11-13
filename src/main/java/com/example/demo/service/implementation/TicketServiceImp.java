@@ -5,12 +5,14 @@ import com.example.demo.mapper.TicketMapper;
 import com.example.demo.models.Tickets.CreateTicketInputModel;
 import com.example.demo.models.Tickets.TicketGetInputModel;
 import com.example.demo.models.Tickets.TicketResponseModel;
+import com.example.demo.models.Tickets.UpdateTicketInputModel;
 import com.example.demo.repository.TicketRepository;
 import com.example.demo.service.TicketService;
 import com.example.demo.utils.Enum.EnumStatus;
 import com.example.demo.utils.Enum.EnumTicketStatus;
 import com.example.demo.utils.Enum.EnumTicketType;
 import com.example.demo.utils.Validations.UserValidationService;
+import com.example.demo.utils.constants.TicketConstants;
 import com.example.demo.utils.constants.userConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -90,10 +92,29 @@ public class TicketServiceImp implements TicketService {
             Tickets ticket = deleteData.get();
             ticket.setStatus(EnumStatus.Inactive);
             ticketRepository.save(ticket);
-            return ResponseEntity.ok(userConstants.USER_DEACTIVATE_SUCCESS);
+            return ResponseEntity.ok(TicketConstants.TICKET_DEACTIVATE_SUCCESS);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(userConstants.USER_DEACTIVATE_FAIL);
+                    .body(TicketConstants.TICKET_DEACTIVATE_FAIL);
+        }
+    }
+
+    public ResponseEntity<String> updateTicketById(Long id, UpdateTicketInputModel updateInputData) {
+        Optional<Tickets> updateData = ticketRepository.findByIdAndStatus(id, EnumStatus.Active);
+        if (updateData.isPresent()) {
+            Tickets tickets = updateData.get();
+            tickets.setId(id);
+            tickets.setTicketName(updateInputData.getTicketName());
+            tickets.setTicketDesc(updateInputData.getTicketDesc());
+            tickets.setTicketType(updateInputData.getTicketType());
+            tickets.setTicketStatus(updateInputData.getTicketStatus());
+            tickets.setPrice(updateInputData.getPrice());
+            tickets.setUpdatedAt(LocalDateTime.now());
+            ticketRepository.save(tickets);
+            return ResponseEntity.ok(TicketConstants.TICKET_UPDATE_SUCCESS);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(TicketConstants.TICKET_DEACTIVATE_FAIL);
         }
     }
 }
