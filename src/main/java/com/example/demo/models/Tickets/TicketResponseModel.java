@@ -17,8 +17,9 @@ public class TicketResponseModel {
     private EnumStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime ExpireAt;
 
-    public TicketResponseModel(long id, String ticketName, String ticketDesc, EnumTicketType ticketType, EnumTicketStatus ticketStatus, BigDecimal price, EnumStatus status, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public TicketResponseModel(long id, String ticketName, String ticketDesc, EnumTicketType ticketType, EnumTicketStatus ticketStatus, BigDecimal price, EnumStatus status, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime ExpireAt) {
         this.id = id;
         this.ticketName = ticketName;
         this.ticketDesc = ticketDesc;
@@ -28,6 +29,7 @@ public class TicketResponseModel {
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.ExpireAt = ExpireAt;
     }
 
     public long getId() {
@@ -100,5 +102,13 @@ public class TicketResponseModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getExpireAt() {
+        return ExpireAt;
+    }
+
+    public void setExpireAt(LocalDateTime expireAt) {
+        ExpireAt = expireAt;
     }
 }

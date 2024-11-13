@@ -11,11 +11,18 @@ import java.util.Optional;
 
 
 public interface TicketRepository extends JpaRepository<Tickets, Long> {
-    List<Tickets> findByticketStatusandticketType(EnumTicketStatus ticketStatus, EnumTicketType ticketType);
+    List<Tickets> findByTicketStatusAndTicketType(EnumTicketStatus ticketStatus, EnumTicketType ticketType);
 
-    List<Tickets> findByticketStatus(EnumTicketStatus ticketStatus);
+    List<Tickets> findByTicketStatus(EnumTicketStatus ticketStatus);
 
-    List<Tickets> findByticketType(EnumTicketType ticketType);
+    List<Tickets> findByTicketType(EnumTicketType ticketType);
 
     Optional<Tickets> findByIdAndStatus(Long id, EnumStatus status);
+
+    boolean existsByTicketName(String ticketName);
+
+    boolean existsByIdAndTicketStatusAndTicketType(Long id, EnumTicketStatus ticketStatus, EnumTicketType ticketType);
+
+
+
 }

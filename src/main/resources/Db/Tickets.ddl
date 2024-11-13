@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS public.tickets
     ticket_status character varying(20) COLLATE pg_catalog."default" NOT NULL,
     ticket_type character varying(50) COLLATE pg_catalog."default" NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
+    expire_at timestamp(6) without time zone NOT NULL,
     CONSTRAINT tickets_pkey PRIMARY KEY (id)
 )

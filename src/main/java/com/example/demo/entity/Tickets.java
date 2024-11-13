@@ -34,8 +34,11 @@ public class Tickets {
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "Status", nullable = false, length = 20)
+    @Column(name = "status", nullable = false, length = 20)
     private EnumStatus status;
+
+    @Column(name = "ExpireAt", nullable = false)
+    private LocalDateTime ExpireDate;
 
     @Column(name = "Created_at", nullable = false)
     private LocalDateTime createdAt;
@@ -113,5 +116,13 @@ public class Tickets {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getExpireDate() {
+        return ExpireDate;
+    }
+
+    public void setExpireDate(LocalDateTime expireDate) {
+        ExpireDate = expireDate;
     }
 }

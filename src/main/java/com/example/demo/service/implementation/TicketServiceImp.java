@@ -1,6 +1,7 @@
 package com.example.demo.service.implementation;
 
 import com.example.demo.entity.Tickets;
+import com.example.demo.exceptions.FieldValidationException;
 import com.example.demo.mapper.TicketMapper;
 import com.example.demo.models.Tickets.CreateTicketInputModel;
 import com.example.demo.models.Tickets.TicketGetInputModel;
@@ -36,15 +37,16 @@ public class TicketServiceImp implements TicketService {
     UserValidationService userValidationService;
 
     public TicketResponseModel createTask (CreateTicketInputModel createInputData) {
-
-        userValidationService.ticketModuleCommonValidation(createInputData.getTicketName());
-
-        Tickets tickets = ticketMapper.toTicketEntity(createInputData);
-        tickets.setStatus(EnumStatus.Active);
-        tickets.setCreatedAt(LocalDateTime.now());
-        tickets.setUpdatedAt(LocalDateTime.now());
-        Tickets createdTicket = ticketRepository.save(tickets);
-        return ticketMapper.toTicketResponse(createdTicket);
+        if (EnumTicketType.Online.equals(createInputData.getTicketType()) || EnumTicketType.Offline.equals(createInputData.getTicketType())) {
+            Tickets tickets = ticketMapper.toTicketEntity(createInputData);
+            tickets.setStatus(EnumStatus.Active);
+            tickets.setCreatedAt(LocalDateTime.now());
+            tickets.setUpdatedAt(LocalDateTime.now());
+            Tickets createdTicket = ticketRepository.save(tickets);
+            return ticketMapper.toTicketResponse(createdTicket);
+        } else {
+            throw new FieldValidationException("Error", TicketConstants.TICKET_TYPE);
+        }
     }
 
     public List<TicketResponseModel> getTicketsList (TicketGetInputModel getData) {
@@ -54,11 +56,11 @@ public class TicketServiceImp implements TicketService {
 
         List<Tickets> ticket;
         if(ticketStatus!= null && ticketType!=null) {
-            ticket = ticketRepository.findByticketStatusandticketType(ticketStatus, ticketType);
+            ticket = ticketRepository.findByTicketStatusAndTicketType(ticketStatus, ticketType);
         } else if(ticketStatus == null && ticketType!=null) {
-            ticket = ticketRepository.findByticketType(ticketType);
+            ticket = ticketRepository.findByTicketType(ticketType);
         } else if(ticketStatus!= null && ticketType == null) {
-            ticket = ticketRepository.findByticketStatus(ticketStatus);
+            ticket = ticketRepository.findByTicketStatus(ticketStatus);
         } else {
             ticket = ticketRepository.findAll();
         }
@@ -66,7 +68,7 @@ public class TicketServiceImp implements TicketService {
         return ticket.stream()
                 .filter(tickets -> {
                     if(searchText != null) {
-                        String lowerSearchText = searchText.toLowerCase();
+                        String lowerSearchText = searchText;
                         return tickets.getTicketName().contains(lowerSearchText) ||
                                 tickets.getTicketDesc().contains(lowerSearchText);
                     }
@@ -109,6 +111,7 @@ public class TicketServiceImp implements TicketService {
             tickets.setTicketType(updateInputData.getTicketType());
             tickets.setTicketStatus(updateInputData.getTicketStatus());
             tickets.setPrice(updateInputData.getPrice());
+            tickets.setExpireDate(updateInputData.getExpireAt());
             tickets.setUpdatedAt(LocalDateTime.now());
             ticketRepository.save(tickets);
             return ResponseEntity.ok(TicketConstants.TICKET_UPDATE_SUCCESS);

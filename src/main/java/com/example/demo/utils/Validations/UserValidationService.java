@@ -1,32 +1,54 @@
 package com.example.demo.utils.Validations;
 
 import com.example.demo.exceptions.FieldValidationException;
+import com.example.demo.models.Tickets.CreateTicketInputModel;
+import com.example.demo.repository.TicketRepository;
 import com.example.demo.repository.userRepository;
+import com.example.demo.utils.Enum.EnumTicketType;
 import com.example.demo.utils.constants.TicketConstants;
 import com.example.demo.utils.constants.userConstants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserValidationService  {
 
-    private final userRepository userRepository;
+    @Autowired
+    private userRepository userRepository;
 
-    public UserValidationService (userRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private TicketRepository ticketRepository;
 
     public void userModuleCommonValidation (String email, String mobileNo) {
         if (userRepository.existsByEmail(email)) {
-            throw new FieldValidationException("Email", userConstants.EMAIL_ALREADY_EXISTS);
+            throw new FieldValidationException("Error", userConstants.EMAIL_ALREADY_EXISTS);
         }
         if (userRepository.existsByMobileNo(mobileNo)) {
-            throw new FieldValidationException("MobileNo", userConstants.MOBILE_ALREADY_EXISTS);
+            throw new FieldValidationException("Error", userConstants.MOBILE_ALREADY_EXISTS);
         }
     }
 
     public void ticketModuleCommonValidation(String ticketName) {
-        if (userRepository.existsByEmail(ticketName)) {
-            throw new FieldValidationException("ticketName", TicketConstants.TICKET_NAME_ALREADY_EXISTS);
+        if (ticketRepository.existsByTicketName(ticketName)) {
+            throw new FieldValidationException("Error", TicketConstants.TICKET_NAME_ALREADY_EXISTS);
+        }
+    }
+
+    public void ticketTypeEnumCheck(CreateTicketInputModel createInputData){
+        if(!EnumTicketType.Online.equals(createInputData.getTicketType()) || !EnumTicketType.Offline.equals(createInputData.getTicketType())){
+            throw new FieldValidationException("Error", TicketConstants.TICKET_TYPE);
+        }
+    }
+
+    public void userIDExistValidation(String Id) {
+        if (!userRepository.existsById(Long.parseLong(Id))) {
+            throw new FieldValidationException("Error", userConstants.USER_NOT_FOUND);
+        }
+    }
+
+    public void ticketIDExistValidation(String Id) {
+        if (!ticketRepository.existsById(Long.parseLong(Id))) {
+            throw new FieldValidationException("Error", TicketConstants.TICKET_NOT_FOUND);
         }
     }
 }

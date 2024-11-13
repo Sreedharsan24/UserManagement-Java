@@ -17,4 +17,8 @@ public class userConstants {
     public static final String USER_DEACTIVATE_SUCCESS = "User deactivated successfully";
     public static final String USER_DEACTIVATE_FAIL = "User not found";
     public static final String SEARCH_MAX_LIMIT ="Search text should not exceed 100 characters";
+    public static final String USER_NOT_FOUND = "User not found";
+    public static final String EXPIRE_AT_REQUIRED = "Expire At is required";
+    public static final String TICKET_INACTIVE = "Ticket Inactive";
+
 }

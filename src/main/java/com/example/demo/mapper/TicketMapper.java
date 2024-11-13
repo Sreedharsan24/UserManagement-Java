@@ -15,6 +15,7 @@ public class TicketMapper {
         ticket.setTicketDesc(createInputData.getTicketDesc());
         ticket.setTicketType(createInputData.getTicketType());
         ticket.setTicketStatus(EnumTicketStatus.Avaliable);
+        ticket.setExpireDate(createInputData.getExpireAt());
         ticket.setPrice(createInputData.getPrice());
         return ticket;
     };
@@ -29,7 +30,8 @@ public class TicketMapper {
                 ticket.getPrice(),
                 ticket.getStatus(),
                 ticket.getCreatedAt(),
-                ticket.getUpdatedAt()
+                ticket.getUpdatedAt(),
+                ticket.getExpireDate()
         );
     }
 }

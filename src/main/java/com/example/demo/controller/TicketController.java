@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.nio.file.FileAlreadyExistsException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/tickets")
@@ -33,16 +31,17 @@ public class TicketController {
         return ticketService.getTicketsList(getData);
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity<TicketResponseModel> getTicketById(@PathVariable Long id) throws FileAlreadyExistsException {
         return ticketService.getById(id);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}/deactivate")
     public ResponseEntity<String> deleteTicket(@PathVariable Long id) throws FileAlreadyExistsException {
         return ticketService.deleteById(id);
     }
 
+    @PutMapping("/{id}")
     public ResponseEntity<String> updateTicket(@PathVariable Long id, @Valid @RequestBody UpdateTicketInputModel updateInputData) throws FileAlreadyExistsException {
         return ticketService.updateTicketById(id, updateInputData);
     }
