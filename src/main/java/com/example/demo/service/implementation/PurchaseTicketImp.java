@@ -76,6 +76,14 @@ public class PurchaseTicketImp implements PurchaseTicket {
         Tickets cancelTicket = ticketRepository.findById(Long.parseLong(ticketCancelInput.getTicket_id()))
                 .orElseThrow(() -> new IllegalArgumentException("Ticket not found with ID: " + ticketCancelInput.getTicket_id()));
 
+        Transaction transactionTicket = purchaseTicketRepository.findLastTransactionByTicketIdNative(Long.parseLong(ticketCancelInput.getTicket_id()));
+        System.out.println(transactionTicket.getUser().getId());
+        System.out.println(ticketCancelInput.getUser_id());
+
+        if(transactionTicket.getUser().getId() != Long.parseLong(ticketCancelInput.getUser_id())){
+            throw new FieldValidationException("Error", userConstants.TICKET_USER_INVALID);
+        }
+
         if (!cancelTicket.getExpireDate().isBefore(LocalDateTime.now()) && cancelTicket.getTicketStatus() == EnumTicketStatus.Sold) {
             cancelTicket.setTicketStatus(EnumTicketStatus.Avaliable);
             ticketRepository.save(cancelTicket);

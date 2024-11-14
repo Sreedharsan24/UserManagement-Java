@@ -20,5 +20,7 @@ public class userConstants {
     public static final String USER_NOT_FOUND = "User not found";
     public static final String EXPIRE_AT_REQUIRED = "Expire At is required";
     public static final String TICKET_INACTIVE = "Ticket Inactive";
+    public static final String TICKET_USER_INVALID = "User Id and Ticket Id does not Match!";
+
 
 }
