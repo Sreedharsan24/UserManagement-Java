@@ -6,5 +6,8 @@ CREATE TABLE IF NOT EXISTS public.users
     mobile_no character varying(255) COLLATE pg_catalog."default",
     name character varying(255) COLLATE pg_catalog."default",
     status character varying(255) COLLATE pg_catalog."default",
-    CONSTRAINT users_pkey PRIMARY KEY (id)
+    CONSTRAINT users_pkey PRIMARY KEY (id),
+    CONSTRAINT users_status_check CHECK (status::text = ANY (ARRAY['Active'::character varying, 'Inactive'::character varying]::text[]))
 )
+
+TABLESPACE pg_default;

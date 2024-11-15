@@ -14,5 +14,8 @@ CREATE TABLE IF NOT EXISTS public.transaction
     CONSTRAINT fkaowu76tt2grelstxnb2dr0rtd FOREIGN KEY (ticket_id)
         REFERENCES public.tickets (id) MATCH SIMPLE
         ON UPDATE NO ACTION
-        ON DELETE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT transaction_status_check CHECK (status::text = ANY (ARRAY['Active'::character varying, 'Inactive'::character varying]::text[]))
 )
+
+TABLESPACE pg_default;

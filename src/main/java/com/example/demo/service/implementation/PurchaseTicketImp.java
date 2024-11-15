@@ -11,7 +11,9 @@ import com.example.demo.repository.TicketRepository;
 import com.example.demo.service.PurchaseTicket;
 import com.example.demo.utils.Enum.EnumStatus;
 import com.example.demo.utils.Enum.EnumTicketStatus;
+import com.example.demo.utils.Enum.EnumTicketType;
 import com.example.demo.utils.Validations.UserValidationService;
+import com.example.demo.utils.constants.TicketConstants;
 import com.example.demo.utils.constants.TransactionConstants;
 import com.example.demo.utils.constants.userConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,10 @@ public class PurchaseTicketImp implements PurchaseTicket {
     public ResponseEntity<String> getTicket(PurchaseTicketInput ticketInput) {
         userValidationService.userIDExistValidation(ticketInput.getUser_id());
         userValidationService.ticketIDExistValidation(ticketInput.getTicket_id());
+
+        if (!(ticketInput.getPurchaseType() == EnumTicketType.Online || ticketInput.getPurchaseType() == EnumTicketType.Offline)) {
+            throw new FieldValidationException("Error", TicketConstants.TICKET_TYPE);
+        }
 
         if (!ticketRepository.existsByIdAndTicketStatusAndTicketType(Long.parseLong(ticketInput.getTicket_id()), EnumTicketStatus.Avaliable, ticketInput.getPurchaseType())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(TransactionConstants.TICKET_ALREADY_SOLD);

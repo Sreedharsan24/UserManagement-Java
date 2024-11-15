@@ -28,6 +28,18 @@ public class UserValidationService  {
         }
     }
 
+    public void emailCheck(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new FieldValidationException("Error", userConstants.EMAIL_ALREADY_EXISTS);
+        }
+    }
+
+    public void mobileCheck(String mobileNo) {
+        if (userRepository.existsByMobileNo(mobileNo)) {
+            throw new FieldValidationException("Error", userConstants.MOBILE_ALREADY_EXISTS);
+        }
+    }
+
     public void ticketModuleCommonValidation(String ticketName) {
         if (ticketRepository.existsByTicketName(ticketName)) {
             throw new FieldValidationException("Error", TicketConstants.TICKET_NAME_ALREADY_EXISTS);

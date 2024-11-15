@@ -1,5 +1,6 @@
 package com.example.demo.service.implementation;
 
+import com.example.demo.exceptions.FieldValidationException;
 import com.example.demo.mapper.userMapper;
 import com.example.demo.models.User.UserGetInputModel;
 import com.example.demo.models.User.userInputModel;
@@ -79,7 +80,7 @@ public class userServiceImp implements userService {
             userResponseModel responseModel = userMapper.toResponseModel(userEntity.get());
             return ResponseEntity.ok(responseModel);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new FieldValidationException("Error", userConstants.USER_NOT_FOUND);
         }
     }
 
@@ -100,13 +101,18 @@ public class userServiceImp implements userService {
         Optional <user> updateUser = userRepository.findById(id);
 
         if (updateUser.isPresent()) {
-            userValidationService.userModuleCommonValidation(updateData.getEmail(), updateData.getMobileNo());
+            if(!(updateUser.get().getEmail().equalsIgnoreCase(updateData.getEmail()))) {
+                userValidationService.emailCheck(updateData.getEmail());
+            }
+            if(!(updateUser.get().getMobileNo().equals(updateData.getMobileNo()))) {
+                userValidationService.mobileCheck(updateData.getMobileNo());
+            }
             user userEntity = userMapper.toEntity(updateData);
             userEntity.setId(id);
             user updatedData = userRepository.save(userEntity);
             return userMapper.toResponseModel(updatedData);
         } else {
-            return null;
+            throw new FieldValidationException("Error", userConstants.USER_NOT_FOUND);
         }
     }
 }

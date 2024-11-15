@@ -1,5 +1,6 @@
 package com.example.demo.models.Tickets;
 
+import com.example.demo.utils.Enum.EnumStatus;
 import com.example.demo.utils.Enum.EnumTicketStatus;
 import com.example.demo.utils.Enum.EnumTicketType;
 import com.example.demo.utils.constants.TicketConstants;
@@ -31,6 +32,18 @@ public class UpdateTicketInputModel {
     @NotNull(message = userConstants.EXPIRE_AT_REQUIRED)
     @FutureOrPresent
     private LocalDateTime expireAt;
+
+    @NotNull(message = "Status is Required")
+    private EnumStatus status;
+
+    @NotBlank(message = "Arrival is Required")
+    private String arrival;
+
+    @NotBlank(message = "Departure is Required")
+    private String departure;
+
+    @NotNull(message = "Travel Date is Required")
+    private LocalDateTime travelDate;
 
     public  String getTicketName() {
         return ticketName;
@@ -78,5 +91,37 @@ public class UpdateTicketInputModel {
 
     public void setExpireAt(LocalDateTime expireAt) {
         this.expireAt = expireAt;
+    }
+
+    public EnumStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnumStatus status) {
+        this.status = status;
+    }
+
+    public String getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public LocalDateTime getTravelDate() {
+        return travelDate;
+    }
+
+    public void setTravelDate(LocalDateTime travelDate) {
+        this.travelDate = travelDate;
     }
 }

@@ -37,6 +37,9 @@ public class TicketServiceImp implements TicketService {
     UserValidationService userValidationService;
 
     public TicketResponseModel createTask (CreateTicketInputModel createInputData) {
+        if (createInputData.getTravelDate().isBefore(createInputData.getExpireAt())) {
+            throw new FieldValidationException("Error", TicketConstants.INVALID_DATES);
+        }
         if (EnumTicketType.Online.equals(createInputData.getTicketType()) || EnumTicketType.Offline.equals(createInputData.getTicketType())) {
             Tickets tickets = ticketMapper.toTicketEntity(createInputData);
             tickets.setStatus(EnumStatus.Active);
@@ -84,7 +87,7 @@ public class TicketServiceImp implements TicketService {
             TicketResponseModel responseData = ticketMapper.toTicketResponse(getData.get());
             return ResponseEntity.ok(responseData);
         } else {
-            return ResponseEntity.notFound().build();
+            throw new FieldValidationException("Error", TicketConstants.TICKET_NOT_FOUND);
         }
     }
 
@@ -104,16 +107,10 @@ public class TicketServiceImp implements TicketService {
     public ResponseEntity<String> updateTicketById(Long id, UpdateTicketInputModel updateInputData) {
         Optional<Tickets> updateData = ticketRepository.findByIdAndStatus(id, EnumStatus.Active);
         if (updateData.isPresent()) {
-            Tickets tickets = updateData.get();
-            tickets.setId(id);
-            tickets.setTicketName(updateInputData.getTicketName());
-            tickets.setTicketDesc(updateInputData.getTicketDesc());
-            tickets.setTicketType(updateInputData.getTicketType());
-            tickets.setTicketStatus(updateInputData.getTicketStatus());
-            tickets.setPrice(updateInputData.getPrice());
-            tickets.setExpireDate(updateInputData.getExpireAt());
-            tickets.setUpdatedAt(LocalDateTime.now());
-            ticketRepository.save(tickets);
+            Tickets ticket = ticketMapper.toEntityForUpdate(updateInputData);
+            ticket.setId(id);
+            ticket.setUpdatedAt(LocalDateTime.now());
+            ticketRepository.save(ticket);
             return ResponseEntity.ok(TicketConstants.TICKET_UPDATE_SUCCESS);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)

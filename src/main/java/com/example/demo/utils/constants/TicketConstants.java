@@ -16,5 +16,6 @@ public class TicketConstants {
     public static final String TICKET_DEACTIVATE_FAIL = "Ticket not found";
     public static final String TICKET_UPDATE_SUCCESS = "Ticket Updated successfully";
     public static final String TICKET_NOT_FOUND = "TicketID NOt Found";
+    public static final String INVALID_DATES = "Travel Date Should not be Before Expire Date";
 
 }

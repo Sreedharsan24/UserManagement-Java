@@ -18,8 +18,11 @@ public class TicketResponseModel {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime ExpireAt;
+    private String arrival;
+    private String departure;
+    private LocalDateTime travelDate;
 
-    public TicketResponseModel(long id, String ticketName, String ticketDesc, EnumTicketType ticketType, EnumTicketStatus ticketStatus, BigDecimal price, EnumStatus status, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime ExpireAt) {
+    public TicketResponseModel(long id, String ticketName, String ticketDesc, EnumTicketType ticketType, EnumTicketStatus ticketStatus, BigDecimal price, EnumStatus status, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime ExpireAt, String arrival, String departure, LocalDateTime travelDate) {
         this.id = id;
         this.ticketName = ticketName;
         this.ticketDesc = ticketDesc;
@@ -30,6 +33,9 @@ public class TicketResponseModel {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.ExpireAt = ExpireAt;
+        this.arrival = arrival;
+        this.departure = departure;
+        this.travelDate = travelDate;
     }
 
     public long getId() {
@@ -110,5 +116,29 @@ public class TicketResponseModel {
 
     public void setExpireAt(LocalDateTime expireAt) {
         ExpireAt = expireAt;
+    }
+
+    public String getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public LocalDateTime getTravelDate() {
+        return travelDate;
+    }
+
+    public void setTravelDate(LocalDateTime travelDate) {
+        this.travelDate = travelDate;
     }
 }

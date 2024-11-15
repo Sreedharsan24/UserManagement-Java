@@ -46,6 +46,15 @@ public class Tickets {
     @Column(name = "Updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column(name = "arrival", nullable = false, length = 100)
+    private String arrival;
+
+    @Column(name = "departure", nullable = false,  length = 100)
+    private String departure;
+
+    @Column(name = "travelDate", nullable = false)
+    private LocalDateTime travelDate;
+
     public long getId() {
         return id;
     }
@@ -124,5 +133,29 @@ public class Tickets {
 
     public void setExpireDate(LocalDateTime expireDate) {
         ExpireDate = expireDate;
+    }
+
+    public String getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(String arrival) {
+        this.arrival = arrival;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public LocalDateTime getTravelDate() {
+        return travelDate;
+    }
+
+    public void setTravelDate(LocalDateTime travelDate) {
+        this.travelDate = travelDate;
     }
 }
