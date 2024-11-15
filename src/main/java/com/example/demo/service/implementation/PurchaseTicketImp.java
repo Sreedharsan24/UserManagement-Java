@@ -1,5 +1,6 @@
 package com.example.demo.service.implementation;
 
+import com.example.demo.email.EmailService;
 import com.example.demo.entity.Tickets;
 import com.example.demo.entity.Transaction;
 import com.example.demo.exceptions.FieldValidationException;
@@ -36,6 +37,9 @@ public class PurchaseTicketImp implements PurchaseTicket {
     TicketRepository ticketRepository;
 
     @Autowired
+    EmailService emailService;
+
+    @Autowired
     PurchaseTicketMapper purchaseTicketMapper;
 
     public ResponseEntity<String> getTicket(PurchaseTicketInput ticketInput) {
@@ -55,6 +59,8 @@ public class PurchaseTicketImp implements PurchaseTicket {
             transaction.setCreatedAt(LocalDateTime.now());
             transaction.setUpdatedAt(LocalDateTime.now());
             purchaseTicketRepository.save(transaction);
+
+            emailService.sendBookConfirmationEmail("Sreedharsanpk@gmail.com", ticketInput.getTicket_id(), "Ticket Description for the Ticket Booking Management System");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
